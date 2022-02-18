@@ -15,7 +15,7 @@ Parameters:
     Description: DynamoDB Table Name
     Type: String
     ConstraintDescription: DynamoDB Table Name
-    Default: lambda-apigateway-table
+    Default: lambda-apigateway-table-test
 
 Resources:
   HelloWorldFunction:
