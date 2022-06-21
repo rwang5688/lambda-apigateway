@@ -28,13 +28,13 @@ def lambda_handler(event, context):
     # DEBUG: print event with formattings
     print("event: %s" % json.dumps(event, indent=2))
 
-    # convert queryStringParameters from JSON object to Python dictionary
-    query_string_parameters = event['queryStringParameters']
-    print("query_string_parameters: %s" % (query_string_parameters))
-    
     message = ''
-    if 'message' in query_string_parameters:
-        message = query_string_parameters['message']
+    if 'queryStringParameter' in event:
+        query_string_parameters = event['queryStringParameters']
+        print("query_string_parameters: %s" % (query_string_parameters))
+    
+        if 'message' in query_string_parameters:
+            message = query_string_parameters['message']
 
     response = {
         "message": message
