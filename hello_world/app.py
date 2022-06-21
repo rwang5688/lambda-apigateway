@@ -29,7 +29,7 @@ def lambda_handler(event, context):
     print("event: %s" % json.dumps(event, indent=2))
 
     message = ''
-    if 'queryStringParameter' in event:
+    if 'queryStringParameters' in event:
         query_string_parameters = event['queryStringParameters']
         print("query_string_parameters: %s" % (query_string_parameters))
     
