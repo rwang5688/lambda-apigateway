@@ -35,17 +35,17 @@ def handler(event, context):
         'ping': lambda x: 'pong'
     }
     
-    response = ""
+    response = {}
+
     if operation in operations:
         # operate on payload as Python dictionary
         response = operations[operation](body['payload'])
     else:
         raise ValueError('Unrecognized operation "{}"'.format(operation))
-        
+    
+    print("response: %s" % json.dumps(response, indent=2))
+
     return {
         "statusCode": 200,
-        "body": json.dumps({
-            "response": response,
-            # "location": ip.text.replace("\n", "")
-        }),
+        "body": json.dumps(response)
     }
