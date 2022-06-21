@@ -28,18 +28,21 @@ def lambda_handler(event, context):
     # DEBUG: print event with formattings
     print("event: %s" % json.dumps(event, indent=2))
 
-    # try:
-    #     ip = requests.get("http://checkip.amazonaws.com/")
-    # except requests.RequestException as e:
-    #     # Send some context about this error to Lambda Logs
-    #     print(e)
+    # convert queryStringParameters from JSON object to Python dictionary
+    queryStringParameters = json.loads(event['queryStringParameters'])
+    print("queryStringParameters: %s" % (queryStringParameters))
+    
+    message = ''
+    if 'message' in queryStringParameters:
+        message = queryStringParameters['message']
 
-    #     raise e
+    response = {
+        "message": message
+    }
+    
+    print("response: %s" % json.dumps(response, indent=2))
 
     return {
         "statusCode": 200,
-        "body": json.dumps({
-            "message": "Hello Lambda and API Gateway!",
-            # "location": ip.text.replace("\n", "")
-        }),
+        "body": json.dumps(response)
     }
